@@ -5,7 +5,6 @@ from "https://www.gstatic.com/firebasejs/11.0.2/firebase-database.js";
 $("#send").on("click", function () {
     let date = new Date();
 
-
     console.log(date);
     const msg = {
         uname : $("#uname").val(),
@@ -13,8 +12,7 @@ $("#send").on("click", function () {
         time: date.toLocaleString()
     }
     const newPostRef = push(dbRef); // ユニークキー
-    
-    set(newPostRef, msg)
+    set(newPostRef, msg) //書き込み
 
     $("#uname").val("");
     $("#text").val("");
@@ -36,11 +34,11 @@ onChildAdded(dbRef, function(data){
         <p class="title">${msg.uname}</p>
         <div contentEditable="true" id="${key}_update" class="msg_area">
             <p>${replaceText}</p>
-            <p class="remove" data-key="${key}">×</p>
+            <p class="update" data-key="${key}"><img src="icon.png" alt="更新"></p>
         </div>
         <div class="msg_info">
             <p class="time">${msg.time}</p>
-            <p class="update" data-key="${key}"><img src="icon.png" alt="更新"></p>
+            <p class="remove" data-key="${key}">×</p>
         </div>
     </div>
     `

@@ -4,9 +4,10 @@
     min-height: 100vh;
     width: 100%;
     margin: 0 auto;
-    padding: 100px 0;
+    padding: 60px 0;
     box-sizing: border-box;
 }
+/* 登録エリア */
 .input_area textarea,
 .input_area input {
     width: 100%;
@@ -32,6 +33,7 @@
     font-size: 16px;
     margin-top: 10px;
 }
+/* 表示エリア */
 #output {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
@@ -47,7 +49,6 @@
 }
 .msg_area {
     padding: 10px;
-    border-radius: 0 0 10px 10px;
     min-height: 100px;
     line-height: 1.5;
     margin: 0 0 10px;
@@ -57,11 +58,11 @@
 #output .msg_wrap.change {
     background: #CEA853;
 }
-#output .msg_area .remove:hover {
+#output .msg_area .update:hover {
     cursor: pointer;
     opacity: 0.7;
 }
-#output .msg_area .remove {
+#output .msg_area .update {
     position: absolute;
     bottom: 0;
     right: 10px;
@@ -72,6 +73,8 @@
     flex-wrap: wrap;
     margin-bottom: 5px;
     padding: 0 10px;
+    color: #fff;
+    align-items: center;
 }
 .time {
     font-size: 11px;
@@ -169,30 +172,37 @@
         opacity: 1;
     }
 }
+
+/* 登録ボタン */
 #txt_label {
-    width: 200px;
+    width: 80px;
     margin: 0 auto;
     text-align: center;
-    height: 40px;
-    border-radius: 10px;
+    height: 80px;
+    border-radius: 50%;
     background: #fff;
     display: flex;
     align-items: center;
     justify-content: center;
-    gap: 10px;
+    animation: blinking 1.5s ease-in-out infinite alternate;
+    box-shadow: 0 3px 5px rgba(0, 0, 0, 0.3);
+    font-size: 12px;
+    margin-bottom: 20px;
 }
-#txt_label::after {
-    width: 20px;
-    height: 20px;
-    display: block;
-    content: "";
-    background: url("../img/present02.png") no-repeat center;
-    background-size: contain;
+#txt_label img {
+    width: 50px;
 }
 #txt_label:hover {
     opacity: 0.7;
 }
-
+@keyframes blinking {
+    0% {
+        opacity: 0.7;
+    }
+    100% {
+        opacity: 1;
+    }
+}
 /* 雪 */
 .snow {
     color: #fffafa;
