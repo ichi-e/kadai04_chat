@@ -1,11 +1,11 @@
 import { app, db, dbRef } from "./firebaseConfig.js";
 import { getDatabase, ref, push, set, onChildAdded, update, remove, onChildChanged, onChildRemoved }
-from "https://www.gstatic.com/firebasejs/11.0.2/firebase-database.js";
+    from "https://www.gstatic.com/firebasejs/11.0.2/firebase-database.js";
 
 $("#send").on("click", function () {
     let date = new Date();
-
     console.log(date);
+
     const msg = {
         uname : $("#uname").val(),
         text: $("#text").val(),
