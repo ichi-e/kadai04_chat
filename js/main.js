@@ -25,9 +25,14 @@ $("#send").on("click", function () {
 onChildAdded(dbRef, function(data){
     const msg =data.val();
     const key = data.key;
-    const replaceText = msg.text.replace(/\n/g,'<br>')
+    const replaceText = msg.text.replace(/\n/g, '<br>');
+
+    if ($("#" + key).length > 0) {
+        return;
+    }
+    
     let h = `
-    <div id="${key}" class="msg_wrap">
+    <div id="${key}" class="msg_wrap ${msg.change ? "change" : ""}">
         <p class="title">${msg.uname}</p>
         <div contentEditable="true" id="${key}_update" class="msg_area">
             <p>${replaceText}</p>
@@ -52,6 +57,7 @@ $("#output").on("click", ".remove", function(){
 
 // 更新
 $("#output").on("click", ".update", function () {
+    let date = new Date();
     const key = $(this).attr("data-key");
     const updatedText = $("#" + key + "_update")
     .html()
@@ -59,10 +65,15 @@ $("#output").on("click", ".update", function () {
     .replace(/<\/div>/g, "")
     .replace(/<br>/g, "\n");
     
+    $("#" + key).addClass("change")  
+    
     update(ref(db, "chat/"+key),{
-        text: updatedText
+        text: updatedText.trim(),
+        time: date.toLocaleString(),
+        change: true
     });
     console.log(key)
+
 });
 
 onChildRemoved(dbRef, (data) => {
@@ -70,7 +81,9 @@ onChildRemoved(dbRef, (data) => {
 });
 
 onChildChanged(dbRef, (data) => {
+    let date = new Date();
     const replaceText = data.val().text.replace(/\n/g,'<br>')
     $("#" + data.key + '_update').html(replaceText);
+    $("#" + data.key + " .time").html(date.toLocaleString());
     $("#" + data.key + '_update').fadeOut(800).fadeIn(800);
 });
